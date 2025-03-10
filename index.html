@@ -39,6 +39,27 @@
             border: 2px solid #0066cc;
             border-radius: 5px;
             font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fff;
+            color: #333;
+        }
+        select {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #0066cc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fff;
+            color: #333;
+            text-align: center; /* Center the text in the dropdown */
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%230066cc" d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+            cursor: pointer;
         }
         button {
             background-color: #ff6200;
@@ -69,15 +90,15 @@
         <form id="survivorForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe_AvA48EOZ-1YIYkiyWhAmQATqwakSTMvfg-ohrykK7bhjjg/formResponse" method="POST" target="hiddenFrame">
             <label for="entry.477724720">What is your name: </label>
             <select name="entry.477724720" id="entry.477724720">
-                    <option value="" disabled selected>Select your name</option>
-                    <option value="Nick Dahl">Name1</option>
-                    <option value="Peter Murray">Name2</option>
-                    <option value="Derrick Defever">Name3</option>
-                    <option value="Jesse Jezak">Name4</option>
-                    <option value="Patrick Gifford">Name5</option>
-                    <option value="Zak Burns">Name6</option>
-                    <!-- Add more names as needed -->
-</select><br>
+                <option value="" disabled selected>Select your name</option>
+                <option value="Nick Dahl">Nick Dahl</option>
+                <option value="Peter Murray">Peter Murray</option>
+                <option value="Derrick Defever">Derrick Defever</option>
+                <option value="Jesse Jezak">Jesse Jezak</option>
+                <option value="Patrick Gifford">Patrick Gifford</option>
+                <option value="Zak Burns">Zak Burns</option>
+                <!-- Add more names as needed -->
+            </select><br>
             
             <label for="entry.569924040">Day 1 Selection: </label>
             <input type="text" name="entry.569924040" id="entry.569924040"><br>
@@ -100,12 +121,9 @@
 
     <script>
         document.getElementById('survivorForm').addEventListener('submit', function(event) {
-            // Let the form submit to Google Forms
-            // Use iframe to handle submission silently
             setTimeout(() => {
-                // Redirect after a short delay to ensure submission completes
                 window.location.href = 'https://docs.google.com/spreadsheets/d/1pGraOWrTnMzlJVy4HyhalR0uaSSa5-EywcQ67wReSsE/edit?gid=2020266128#gid=2020266128';
-            }, 1000); // 1-second delay
+            }, 1000);
         });
     </script>
 </body>
