@@ -95,12 +95,14 @@
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
         }
-        /* Countdown Clock Styles */
-        #countdown {
-            font-size: 24px;
+        /* Countdown Timer Styles */
+        .countdown {
+            font-size: 14px;
             color: #2A6A5E;
-            margin-top: 20px;
+            margin-top: -10px;
+            margin-bottom: 15px;
             font-weight: bold;
+            display: block;
         }
     </style>
 </head>
@@ -137,33 +139,38 @@
             
             <label for="entry.569924040">Day 1 Selection (Thursday): </label>
             <input type="text" name="entry.569924040" id="entry.569924040"><br>
+            <span id="countdown1" class="countdown"></span>
             
             <label for="entry.702432809">Day 2 Selection (Friday): </label>
             <input type="text" name="entry.702432809" id="entry.702432809"><br>
+            <span id="countdown2" class="countdown"></span>
             
             <label for="entry.759815260">Day 3 Selection (Saturday): </label>
             <input type="text" name="entry.759815260" id="entry.759815260"><br>
+            <span id="countdown3" class="countdown"></span>
             
             <label for="entry.577425884">Day 4 Selection (Sunday): </label>
             <input type="text" name="entry.577425884" id="entry.577425884"><br>
+            <span id="countdown4" class="countdown"></span>
 
             <label for="entry.20028034">Day 5 Selection (Thursday): </label>
             <input type="text" name="entry.20028034" id="entry.20028034"><br>
+            <span id="countdown5" class="countdown"></span>
             
             <label for="entry.979732111">Day 6 Selection (Friday): </label>
             <input type="text" name="entry.979732111" id="entry.979732111"><br>
+            <span id="countdown6" class="countdown"></span>
             
             <label for="entry.2142180165">Day 7 Selection (Saturday): </label>
             <input type="text" name="entry.2142180165" id="entry.2142180165"><br>
+            <span id="countdown7" class="countdown"></span>
             
             <label for="entry.269056470">Day 8 Selection (Sunday): </label>
             <input type="text" name="entry.269056470" id="entry.269056470"><br>
+            <span id="countdown8" class="countdown"></span>
             
             <button type="submit">Submit Picks / View Results</button>
         </form>
-
-        <!-- Countdown Clock Display -->
-        <div id="countdown"></div>
 
         <!-- Hidden iframe to handle form submission -->
         <iframe name="hiddenFrame" style="display:none;"></iframe>
@@ -180,29 +187,47 @@
             }, 1000);
         });
 
-        // Countdown Clock
-        function updateCountdown() {
-            var targetDate = new Date("March 20, 2025 12:00:00"); // Noon on March 20, 2025
+        // Countdown Timer Function
+        function updateCountdowns() {
+            var baseDate = new Date("March 20, 2025 12:00:00"); // Day 1 at noon
             var now = new Date();
-            var timeLeft = targetDate - now;
 
-            if (timeLeft <= 0) {
-                document.getElementById("countdown").innerHTML = "Tournament Has Begun!";
-                return;
-            }
+            // Array of countdown elements and their offsets (in days)
+            var countdowns = [
+                { id: "countdown1", offset: 0 }, // Day 1
+                { id: "countdown2", offset: 1 }, // Day 2
+                { id: "countdown3", offset: 2 }, // Day 3
+                { id: "countdown4", offset: 3 }, // Day 4
+                { id: "countdown5", offset: 4 }, // Day 5
+                { id: "countdown6", offset: 5 }, // Day 6
+                { id: "countdown7", offset: 6 }, // Day 7
+                { id: "countdown8", offset: 7 }  // Day 8
+            ];
 
-            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            countdowns.forEach(function(countdown) {
+                // Add offset days to base date
+                var targetDate = new Date(baseDate);
+                targetDate.setDate(baseDate.getDate() + countdown.offset);
+                
+                var timeLeft = targetDate - now;
 
-            document.getElementById("countdown").innerHTML = 
-                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                if (timeLeft <= 0) {
+                    document.getElementById(countdown.id).innerHTML = "Day " + (countdown.offset + 1) + " Has Begun!";
+                } else {
+                    var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    document.getElementById(countdown.id).innerHTML = 
+                        days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+                }
+            });
         }
 
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to display immediately
+        // Update countdowns every second
+        setInterval(updateCountdowns, 1000);
+        updateCountdowns(); // Initial call to display immediately
     </script>
 </body>
 </html>
