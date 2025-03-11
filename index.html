@@ -22,14 +22,14 @@
             text-align: center;
         }
         h1 {
-            color: #ff6200;
+            color: #18453B;
             font-size: 28px;
             margin-bottom: 20px;
         }
         label {
             display: block;
             margin: 10px 0 5px;
-            color: #333;
+            color: #18453B;
             font-weight: bold;
         }
         input[type="text"] {
@@ -41,7 +41,7 @@
             font-size: 16px;
             box-sizing: border-box;
             background-color: #fff;
-            color: #333;
+            color: #18453B;
         }
         select {
             width: 90%;
@@ -72,7 +72,7 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #e55b00;
+            background-color: ##18453B;
         }
         .header-img {
             width: 100%;
@@ -84,7 +84,7 @@
 </head>
 <body>
     <div class="form-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/NCAA_logo.svg" class="header-img" alt="NCAA Header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/March_Madness_logo.svg" class="header-img" alt="NCAA Header">
         <h1>NCAA 2025 Survivor Bracket Form</h1>
         
         <form id="survivorForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe_AvA48EOZ-1YIYkiyWhAmQATqwakSTMvfg-ohrykK7bhjjg/formResponse" method="POST" target="hiddenFrame">
@@ -143,7 +143,10 @@
         <!-- Hidden iframe to handle form submission -->
         <iframe name="hiddenFrame" style="display:none;"></iframe>
     </div>
-
+    
+<!-- Author credit at the bottom -->
+    <div class="author-credit">Created by Mike Schwartz</div>
+    
     <script>
         document.getElementById('survivorForm').addEventListener('submit', function(event) {
             setTimeout(() => {
