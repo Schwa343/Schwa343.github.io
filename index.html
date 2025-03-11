@@ -12,7 +12,8 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            position: relative; /* Added to allow absolute positioning of author credit */
+            position: relative; /* For absolute positioning of author credit */
+            padding-bottom: 50px; /* Adds extra space at the bottom to prevent overlap */
         }
         .form-container {
             background-color: rgba(255, 255, 255, 0.9);
@@ -53,10 +54,10 @@
             font-size: 16px;
             box-sizing: border-box;
             background-color: #fff;
-            color: #18453B; /* Updated to Spartan green */
+            color: #18453B; /* Spartan green */
             text-align: center;
             appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%2318453B" d="M7 10l5 5 5-5z"/></svg>'); /* Updated arrow to Spartan green */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%2318453B" d="M7 10l5 5 5-5z"/></svg>'); /* Spartan green arrow */
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 12px;
@@ -73,7 +74,7 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #18453B; /* Fixed typo (removed extra #) to use Spartan green */
+            background-color: #18453B; /* Spartan green */
         }
         .header-img {
             width: 100%;
@@ -83,7 +84,7 @@
         }
         .author-credit {
             position: absolute;
-            bottom: 10px;
+            bottom: 20px; /* Increased from 10px to 20px for more spacing */
             left: 50%;
             transform: translateX(-50%); /* Centers horizontally */
             color: rgba(24, 69, 59, 0.7); /* Spartan green with 70% opacity */
@@ -169,4 +170,5 @@
         });
     </script>
 </body>
+</html>
 </html>
