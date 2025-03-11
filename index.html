@@ -12,8 +12,8 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            position: relative; /* For absolute positioning of author credit */
-            padding-bottom: 50px; /* Adds extra space at the bottom to prevent overlap */
+            position: relative;
+            padding-bottom: 50px;
         }
         .form-container {
             background-color: rgba(232, 232, 232, 0.65);
@@ -24,14 +24,14 @@
             text-align: center;
         }
         h1 {
-            color: #2A6A5E; /* Spartan green */
+            color: #2A6A5E;
             font-size: 28px;
             margin-bottom: 20px;
         }
         label {
             display: block;
             margin: 10px 0 5px;
-            color: #2A6A5E; /* Spartan green */
+            color: #2A6A5E;
             font-weight: bold;
         }
         input[type="text"] {
@@ -43,7 +43,7 @@
             font-size: 16px;
             box-sizing: border-box;
             background-color: #fff;
-            color: #2A6A5E; /* Spartan green */
+            color: #2A6A5E;
         }
         select {
             width: 90%;
@@ -54,10 +54,10 @@
             font-size: 16px;
             box-sizing: border-box;
             background-color: #fff;
-            color: #2A6A5E; /* Spartan green */
+            color: #2A6A5E;
             text-align: center;
             appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%2318453B" d="M7 10l5 5 5-5z"/></svg>'); /* Spartan green arrow */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%2318453B" d="M7 10l5 5 5-5z"/></svg>');
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 12px;
@@ -74,7 +74,7 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #2A6A5E; /* Spartan green */
+            background-color: #2A6A5E;
         }
         .header-img {
             width: 100%;
@@ -84,16 +84,23 @@
         }
         .author-credit {
             position: absolute;
-            bottom: 20px; /* Increased from 10px to 20px for more spacing */
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%); /* Centers horizontally */
-            color: rgba(24, 69, 59, 0.7); /* Spartan green with 70% opacity */
+            transform: translateX(-50%);
+            color: rgba(24, 69, 59, 0.7);
             font-size: 14px;
             font-style: italic;
             text-align: center;
             padding: 5px 10px;
-            background-color: rgba(255, 255, 255, 0.3); /* Slight background for readability */
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
+        }
+        /* Countdown Clock Styles */
+        #countdown {
+            font-size: 24px;
+            color: #2A6A5E;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -105,7 +112,7 @@
         <form id="survivorForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe_AvA48EOZ-1YIYkiyWhAmQATqwakSTMvfg-ohrykK7bhjjg/formResponse" method="POST" target="hiddenFrame">
             <label for="entry.477724720">What is your name: </label>
             <select name="entry.477724720" id="entry.477724720">
-               <option value="" disabled selected>Select your name</option>
+                <option value="" disabled selected>Select your name</option>
                 <option value="Patrick Gifford">Patrick Gifford</option>
                 <option value="Garret Gotaas">Garret Gotaas</option>
                 <option value="Mike Schwartz">Mike Schwartz</option>
@@ -155,6 +162,9 @@
             <button type="submit">Submit Picks / View Results</button>
         </form>
 
+        <!-- Countdown Clock Display -->
+        <div id="countdown"></div>
+
         <!-- Hidden iframe to handle form submission -->
         <iframe name="hiddenFrame" style="display:none;"></iframe>
     </div>
@@ -163,12 +173,36 @@
     <div class="author-credit">Created by Mike Schwartz</div>
     
     <script>
+        // Form submission redirect
         document.getElementById('survivorForm').addEventListener('submit', function(event) {
             setTimeout(() => {
                 window.location.href = 'https://docs.google.com/spreadsheets/d/1pGraOWrTnMzlJVy4HyhalR0uaSSa5-EywcQ67wReSsE/edit?gid=2020266128#gid=2020266128';
             }, 1000);
         });
+
+        // Countdown Clock
+        function updateCountdown() {
+            var targetDate = new Date("March 20, 2025 12:00:00"); // Noon on March 20, 2025
+            var now = new Date();
+            var timeLeft = targetDate - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById("countdown").innerHTML = "Tournament Has Begun!";
+                return;
+            }
+
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display immediately
     </script>
 </body>
-</html>
 </html>
