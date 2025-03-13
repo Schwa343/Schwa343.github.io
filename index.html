@@ -15,53 +15,25 @@
             position: relative;
             padding-bottom: 50px;
         }
-        .form-container {
+        .login-container, .register-container, .form-container {
             background-color: rgba(232, 232, 232, 0.65);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            width: 400px;
+            width: 300px;
             text-align: center;
+            display: none;
         }
-        h1 {
-            color: #2A6A5E;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        label {
+        .login-container.active, .register-container.active, .form-container.active {
             display: block;
-            margin: 10px 0 5px;
-            color: #2A6A5E;
-            font-weight: bold;
         }
-        input[type="text"] {
+        input[type="text"], input[type="password"] {
             width: 90%;
             padding: 8px;
-            margin-bottom: 15px;
+            margin: 10px 0;
             border: 2px solid #2A6A5E;
             border-radius: 5px;
-            font-size: 16px;
             box-sizing: border-box;
-            background-color: #fff;
-            color: #2A6A5E;
-        }
-        select {
-            width: 90%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 2px solid #2A6A5E;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-            background-color: #fff;
-            color: #2A6A5E;
-            text-align: center;
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%2318453B" d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 12px;
-            cursor: pointer;
         }
         button {
             background-color: #2A6A5E;
@@ -70,119 +42,214 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            margin: 5px;
         }
-        button:hover {
-            background-color: #2A6A5E;
-        }
-        .header-img {
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-        .author-credit {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(24, 69, 59, 0.7);
+        .error-message, .success-message {
             font-size: 14px;
-            font-style: italic;
-            text-align: center;
-            padding: 5px 10px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
         }
-        /* Countdown Clock Styles */
-        #countdown {
-            font-size: 24px;
-            color: red; /* Changed to red */
-            margin-bottom: 15px;
-            font-weight: bold;
+        .error-message { color: red; }
+        .success-message { color: green; }
+        .link {
+            color: #2A6A5E;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 14px;
         }
+        /* Existing form-container styles... */
     </style>
 </head>
 <body>
+    <div class="login-container active">
+        <h1>Login</h1>
+        <input type="text" id="loginUsername" placeholder="Username" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button onclick="handleLogin()">Login</button>
+        <div id="loginError" class="error-message">Invalid username or password</div>
+        <div class="link" onclick="showRegister()">New user? Register here</div>
+    </div>
+
+    <div class="register-container">
+        <h1>Register</h1>
+        <input type="text" id="regUsername" placeholder="Username" required>
+        <input type="password" id="regPassword" placeholder="Password" required>
+        <button onclick="handleRegister()">Register</button>
+        <div id="regError" class="error-message">Username already taken</div>
+        <div id="regSuccess" class="success-message">Registration successful! Logging in...</div>
+        <div class="link" onclick="showLogin()">Back to login</div>
+    </div>
+
     <div class="form-container">
         <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/March_Madness_logo.svg" class="header-img" alt="NCAA Header">
         <h1>NCAA 2025 Survivor Bracket Form</h1>
         
         <form id="survivorForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe_AvA48EOZ-1YIYkiyWhAmQATqwakSTMvfg-ohrykK7bhjjg/formResponse" method="POST" target="hiddenFrame">
-            <!-- Countdown Clock Moved Above "What is your name" -->
             <div id="countdown"></div>
             
-            <label for="entry.477724720">What is your name: </label>
-            <select name="entry.477724720" id="entry.477724720">
-                <option value="" disabled selected>Select your name</option>
-                <option value="Patrick Gifford">Patrick Gifford</option>
-                <option value="Garret Gotaas">Garret Gotaas</option>
-                <option value="Mike Schwartz">Mike Schwartz</option>
-                <option value="Derrick Defever">Derrick Defever</option>
-                <option value="Matt Syzmanski">Matt Syzmanski</option>
-                <option value="Connor Giroux">Connor Giroux</option>
-                <option value="Nick Dahl">Nick Dahl</option>
-                <option value="Chris Canada">Chris Canada</option>
-                <option value="Brian Burger">Brian Burger</option>
-                <option value="Rich Deward">Rich Deward</option>
-                <option value="Peter Murray">Peter Murray</option>
-                <option value="Spenser Pawlik">Spenser Pawlik</option>
-                <option value="Nick Mowid">Nick Mowid</option>
-                <option value="James Conway">James Conway</option>
-                <option value="Tom Strobel">Tom Strobel</option>
-                <option value="Zak Burns">Zak Burns</option>
-                <option value="Alex McAdoo">Alex McAdoo</option>
-                <option value="Sean Falvey">Sean Falvey</option>
-                <option value="Tyler Decoster">Tyler Decoster</option>
-                <option value="Mike Gallagher">Mike Gallagher</option>
-            </select><br>
-            
             <label for="entry.569924040">Day 1 Selection (Thursday): </label>
-            <input type="text" name="entry.569924040" id="entry.569924040"><br>
+            <input type="text" name="entry.569924040" id="entry.569924040">
+            <span id="prev.569924040" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <label for="entry.702432809">Day 2 Selection (Friday): </label>
-            <input type="text" name="entry.702432809" id="entry.702432809"><br>
+            <input type="text" name="entry.702432809" id="entry.702432809">
+            <span id="prev.702432809" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <label for="entry.759815260">Day 3 Selection (Saturday): </label>
-            <input type="text" name="entry.759815260" id="entry.759815260"><br>
+            <input type="text" name="entry.759815260" id="entry.759815260">
+            <span id="prev.759815260" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <label for="entry.577425884">Day 4 Selection (Sunday): </label>
-            <input type="text" name="entry.577425884" id="entry.577425884"><br>
+            <input type="text" name="entry.577425884" id="entry.577425884">
+            <span id="prev.577425884" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
 
             <label for="entry.20028034">Day 5 Selection (Thursday): </label>
-            <input type="text" name="entry.20028034" id="entry.20028034"><br>
+            <input type="text" name="entry.20028034" id="entry.20028034">
+            <span id="prev.20028034" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <label for="entry.979732111">Day 6 Selection (Friday): </label>
-            <input type="text" name="entry.979732111" id="entry.979732111"><br>
+            <input type="text" name="entry.979732111" id="entry.979732111">
+            <span id="prev.979732111" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <label for="entry.2142180165">Day 7 Selection (Saturday): </label>
-            <input type="text" name="entry.2142180165" id="entry.2142180165"><br>
+            <input type="text" name="entry.2142180165" id="entry.2142180165">
+            <span id="prev.2142180165" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <label for="entry.269056470">Day 8 Selection (Sunday): </label>
-            <input type="text" name="entry.269056470" id="entry.269056470"><br>
+            <input type="text" name="entry.269056470" id="entry.269056470">
+            <span id="prev.269056470" style="font-size: 14px; color: #666; margin-left: 10px;"></span><br>
             
             <button type="submit">Submit Picks / View Results</button>
+            <button type="button" onclick="logout()">Logout</button>
         </form>
-
-        <!-- Hidden iframe to handle form submission -->
-        <iframe name="hiddenFrame" style="display:none;"></iframe>
     </div>
     
-    <!-- Author credit at the bottom -->
     <div class="author-credit">Created by Mike Schwartz</div>
-    
+    <iframe name="hiddenFrame" style="display:none;"></iframe>
+
     <script>
-        // Form submission redirect
+        let currentUser = null;
+
+        // Load users from localStorage or initialize empty
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+
+        // Show login page
+        function showLogin() {
+            document.querySelector(".login-container").classList.add("active");
+            document.querySelector(".register-container").classList.remove("active");
+            document.querySelector(".form-container").classList.remove("active");
+            document.getElementById("loginError").style.display = "none";
+        }
+
+        // Show register page
+        function showRegister() {
+            document.querySelector(".login-container").classList.remove("active");
+            document.querySelector(".register-container").classList.add("active");
+            document.querySelector(".form-container").classList.remove("active");
+            document.getElementById("regError").style.display = "none";
+            document.getElementById("regSuccess").style.display = "none";
+        }
+
+        // Handle registration
+        function handleRegister() {
+            const username = document.getElementById("regUsername").value.trim().toLowerCase();
+            const password = document.getElementById("regPassword").value;
+            const errorDiv = document.getElementById("regError");
+            const successDiv = document.getElementById("regSuccess");
+
+            if (!username || !password) {
+                errorDiv.textContent = "Please enter both username and password";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            if (users[username]) {
+                errorDiv.textContent = "Username already taken";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            users[username] = password;
+            localStorage.setItem('users', JSON.stringify(users));
+            currentUser = username;
+
+            successDiv.style.display = "block";
+            setTimeout(() => {
+                document.querySelector(".register-container").classList.remove("active");
+                document.querySelector(".form-container").classList.add("active");
+                updatePreviousPicks(username);
+            }, 1000);
+        }
+
+        // Handle login
+        function handleLogin() {
+            const username = document.getElementById("loginUsername").value.trim().toLowerCase();
+            const password = document.getElementById("loginPassword").value;
+            const errorDiv = document.getElementById("loginError");
+
+            if (users[username] && users[username] === password) {
+                currentUser = username;
+                document.querySelector(".login-container").classList.remove("active");
+                document.querySelector(".form-container").classList.add("active");
+                updatePreviousPicks(username);
+                errorDiv.style.display = "none";
+            } else {
+                errorDiv.style.display = "block";
+            }
+        }
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            document.querySelector(".form-container").classList.remove("active");
+            document.querySelector(".login-container").classList.add("active");
+            document.getElementById("loginUsername").value = "";
+            document.getElementById("loginPassword").value = "";
+        }
+
+        // Update previous picks
+        function updatePreviousPicks(username) {
+            const fields = [
+                'entry.569924040', 'entry.702432809', 'entry.759815260', 'entry.577425884',
+                'entry.20028034', 'entry.979732111', 'entry.2142180165', 'entry.269056470'
+            ];
+            
+            const storedPicks = JSON.parse(localStorage.getItem(`picks_${username}`)) || {};
+            
+            fields.forEach(field => {
+                const prevSpan = document.getElementById(`prev.${field}`);
+                const input = document.getElementById(field);
+                const previousPick = storedPicks[field] || '';
+                prevSpan.textContent = previousPick ? `Previous: ${previousPick}` : 'No previous pick';
+                input.value = previousPick;
+            });
+        }
+
+        // Form submission
         document.getElementById('survivorForm').addEventListener('submit', function(event) {
+            if (!currentUser) return;
+
+            const picks = {
+                'entry.569924040': document.getElementById('entry.569924040').value,
+                'entry.702432809': document.getElementById('entry.702432809').value,
+                'entry.759815260': document.getElementById('entry.759815260').value,
+                'entry.577425884': document.getElementById('entry.577425884').value,
+                'entry.20028034': document.getElementById('entry.20028034').value,
+                'entry.979732111': document.getElementById('entry.979732111').value,
+                'entry.2142180165': document.getElementById('entry.2142180165').value,
+                'entry.269056470': document.getElementById('entry.269056470').value
+            };
+
+            localStorage.setItem(`picks_${currentUser}`, JSON.stringify(picks));
+
             setTimeout(() => {
                 window.location.href = 'https://docs.google.com/spreadsheets/d/1pGraOWrTnMzlJVy4HyhalR0uaSSa5-EywcQ67wReSsE/edit?gid=2020266128#gid=2020266128';
             }, 1000);
         });
 
-        // Countdown Clock
+        // Countdown
         function updateCountdown() {
-            var targetDate = new Date("March 20, 2025 12:00:00"); // Noon on March 20, 2025
+            var targetDate = new Date("March 20, 2025 12:00:00");
             var now = new Date();
             var timeLeft = targetDate - now;
 
@@ -200,9 +267,8 @@
                 days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
         }
 
-        // Update countdown every second
         setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to display immediately
+        updateCountdown();
     </script>
 </body>
 </html>
