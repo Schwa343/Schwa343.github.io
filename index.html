@@ -112,6 +112,17 @@
             font-size: 20px;
             margin-bottom: 10px;
             text-align: center;
+            cursor: pointer;
+            background-color: rgba(42, 106, 94, 0.1);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #game-schedule .day-games {
+            display: none;
+            margin-bottom: 15px;
+        }
+        #game-schedule .day-games.active {
+            display: block;
         }
         #game-schedule div {
             margin: 5px 0;
@@ -182,8 +193,40 @@
 
         <!-- Game Schedule Section -->
         <div id="game-schedule">
-            <h2>Games for March 19, 2025</h2>
-            <div id="game-list"></div>
+            <h2 onclick="toggleGames('march-19')">March 19, 2025 (First Four)</h2>
+            <div id="march-19" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
+
+            <h2 onclick="toggleGames('march-20')">March 20, 2025 (First Round - Day 1)</h2>
+            <div id="march-20" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
+
+            <h2 onclick="toggleGames('march-21')">March 21, 2025 (First Round - Day 2)</h2>
+            <div id="march-21" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
+
+            <h2 onclick="toggleGames('march-22')">March 22, 2025 (Second Round - Day 3)</h2>
+            <div id="march-22" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
+
+            <h2 onclick="toggleGames('march-23')">March 23, 2025 (Second Round - Day 4)</h2>
+            <div id="march-23" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
+
+            <h2 onclick="toggleGames('march-24')">March 24, 2025 (Rest Day)</h2>
+            <div id="march-24" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
+
+            <h2 onclick="toggleGames('march-25')">March 25, 2025 (Rest Day)</h2>
+            <div id="march-25" class="day-games">
+                <!-- Games will be populated here -->
+            </div>
         </div>
 
         <!-- Hidden iframe to handle form submission -->
@@ -225,42 +268,65 @@
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call to display immediately
 
-    // Fetch NCAA Games from The Sports DB
-const apiKey = '3'; // Free test key
-const leagueId = '4607'; // NCAA Division I Men's Basketball
-const season = '2024-2025'; // Try "2024-2025" instead of "2025"
-const apiUrl = `https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsseason.php?id=${leagueId}&s=${season}`;
-const targetDate = '2025-03-19'; // Today’s date
+        // Fetch NCAA Games from The Sports DB
+        const apiKey = '3'; // Free test key
+        const leagueId = '4607'; // NCAA Division I Men's Basketball
+        const season = '2024-2025'; // Season format
+        const apiUrl = `https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsseason.php?id=${leagueId}&s=${season}`;
 
-async function fetchGames() {
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        console.log('API Response:', data); // Log the full response for debugging
-        const games = data.events || [];
+        const weeklyGames = {
+            "march-19": [],
+            "march-20": [],
+            "march-21": [],
+            "march-22": [],
+            "march-23": [],
+            "march-24": [],
+            "march-25": []
+        };
 
-        // Filter for games on March 19, 2025
-        const todaysGames = games.filter(game => game.dateEvent === targetDate);
+        async function fetchGames() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                console.log('API Response:', data); // Log the full response for debugging
+                const games = data.events || [];
 
-        const gameList = document.getElementById('game-list');
-        if (todaysGames.length === 0) {
-            gameList.innerHTML = '<p>No NCAA games scheduled for March 19, 2025, or data unavailable.</p>';
-        } else {
-            todaysGames.forEach(game => {
-                const gameDiv = document.createElement('div');
-                const time = new Date(`${game.dateEvent}T${game.strTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                gameDiv.innerHTML = `${game.strAwayTeam} vs ${game.strHomeTeam} at ${time}`;
-                gameList.appendChild(gameDiv);
-            });
-        }
-    } catch (error) {
-        console.error('Error fetching games:', error);
-        document.getElementById('game-list').innerHTML = '<p>Failed to load games.</p>';
-    }
-}
+                // Filter games for the week of March 19–25, 2025
+                games.forEach(game => {
+                    const gameDate = game.dateEvent;
+                    if (gameDate === "2025-03-19") {
+                        weeklyGames["march-19"].push(game);
+                    } else if (gameDate === "2025-03-20") {
+                        weeklyGames["march-20"].push(game);
+                    } else if (gameDate === "2025-03-21") {
+                        weeklyGames["march-21"].push(game);
+                    } else if (gameDate === "2025-03-22") {
+                        weeklyGames["march-22"].push(game);
+                    } else if (gameDate === "2025-03-23") {
+                        weeklyGames["march-23"].push(game);
+                    } else if (gameDate === "2025-03-24") {
+                        weeklyGames["march-24"].push(game);
+                    } else if (gameDate === "2025-03-25") {
+                        weeklyGames["march-25"].push(game);
+                    }
+                });
 
-// Call the function when the page loads
-fetchGames();
-    </script>
-</body>
-</html>
+                // Display games for each day
+                Object.keys(weeklyGames).forEach(day => {
+                    const gameList = document.getElementById(day);
+                    const games = weeklyGames[day];
+
+                    if (games.length === 0) {
+                        gameList.innerHTML = '<p>No games scheduled or data unavailable.</p>';
+                    } else {
+                        games.forEach(game => {
+                            const gameDiv = document.createElement('div');
+                            const time = new Date(`${game.dateEvent}T${game.strTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            gameDiv.innerHTML = `${game.strAwayTeam} vs ${game.strHomeTeam} at ${time}`;
+                            gameList.appendChild(gameDiv);
+                        });
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching games:', error);
+                Object
