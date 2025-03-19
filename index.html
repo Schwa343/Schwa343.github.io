@@ -28,7 +28,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            width: 400px;
+            width: 460px; /* Increased from 400px to accommodate larger input fields */
             text-align: center;
             order: 2;
         }
@@ -37,8 +37,8 @@
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            width: 320px; /* Increased from 300px to 320px (2 characters wider) */
-            text-align: center; /* Center all text in the game list */
+            width: 320px;
+            text-align: center;
             color: #2A6A5E;
         }
         .thursday-games {
@@ -54,10 +54,10 @@
         }
         .game-list div {
             margin: 5px 0;
-            font-size: 16px; /* Matches the "What is your name" font size */
-            color: #2A6A5E; /* Green */
-            white-space: nowrap; /* Prevent text wrapping */
-            text-align: center; /* Center the game text */
+            font-size: 16px;
+            color: #2A6A5E;
+            white-space: nowrap;
+            text-align: center;
         }
         h1 {
             color: #2A6A5E;
@@ -71,7 +71,7 @@
             font-weight: bold;
         }
         input[type="text"] {
-            width: 90%;
+            width: 100%; /* Increased from 90% to 100% to maximize space in the larger container */
             padding: 8px;
             margin-bottom: 15px;
             border: 2px solid #2A6A5E;
@@ -82,7 +82,7 @@
             color: #2A6A5E;
         }
         select {
-            width: 90%;
+            width: 100%; /* Adjusted to match input fields */
             padding: 8px;
             margin-bottom: 15px;
             border: 2px solid #2A6A5E;
@@ -255,44 +255,44 @@
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call to display immediately
 
-        // Hardcoded NCAA Games for Thursday, March 20, 2025 (in ET)
+        // Hardcoded NCAA Games for Thursday, March 20, 2025 (in ET) with seeds
         const thursdayGames = [
-            { strAwayTeam: "Creighton", strHomeTeam: "Louisville", timeET: "12:15 PM" },
-            { strAwayTeam: "High Point", strHomeTeam: "Purdue", timeET: "12:40 PM" },
-            { strAwayTeam: "Montana", strHomeTeam: "Wisconsin", timeET: "1:30 PM" },
-            { strAwayTeam: "SIU Edwardsville", strHomeTeam: "Houston", timeET: "2:00 PM" },
-            { strAwayTeam: "Alabama State", strHomeTeam: "Auburn", timeET: "2:50 PM" },
-            { strAwayTeam: "McNeese", strHomeTeam: "Clemson", timeET: "3:15 PM" },
-            { strAwayTeam: "BYU", strHomeTeam: "VCU", timeET: "4:05 PM" },
-            { strAwayTeam: "Georgia", strHomeTeam: "Gonzaga", timeET: "4:35 PM" },
-            { strAwayTeam: "Wofford", strHomeTeam: "Tennessee", timeET: "6:50 PM" },
-            { strAwayTeam: "Arkansas", strHomeTeam: "Kansas", timeET: "7:10 PM" },
-            { strAwayTeam: "Yale", strHomeTeam: "Texas A&M", timeET: "7:25 PM" },
-            { strAwayTeam: "Drake", strHomeTeam: "Missouri", timeET: "7:35 PM" },
-            { strAwayTeam: "Utah State", strHomeTeam: "UCLA", timeET: "9:25 PM" },
-            { strAwayTeam: "Omaha", strHomeTeam: "St. John's", timeET: "9:45 PM" },
-            { strAwayTeam: "San Diego", strHomeTeam: "Michigan", timeET: "10:00 PM" },
-            { strAwayTeam: "UNC Wilmington", strHomeTeam: "Texas Tech", timeET: "10:10 PM" }
+            { strAwayTeam: "Creighton", awaySeed: "9", strHomeTeam: "Louisville", homeSeed: "8", timeET: "12:15 PM" },
+            { strAwayTeam: "High Point", awaySeed: "13", strHomeTeam: "Purdue", homeSeed: "4", timeET: "12:40 PM" },
+            { strAwayTeam: "Montana", awaySeed: "14", strHomeTeam: "Wisconsin", homeSeed: "3", timeET: "1:30 PM" },
+            { strAwayTeam: "SIU Edwardsville", awaySeed: "16", strHomeTeam: "Houston", homeSeed: "1", timeET: "2:00 PM" },
+            { strAwayTeam: "Alabama State", awaySeed: "16", strHomeTeam: "Auburn", homeSeed: "1", timeET: "2:50 PM" },
+            { strAwayTeam: "McNeese", awaySeed: "12", strHomeTeam: "Clemson", homeSeed: "5", timeET: "3:15 PM" },
+            { strAwayTeam: "VCU", awaySeed: "11", strHomeTeam: "BYU", homeSeed: "6", timeET: "4:05 PM" },
+            { strAwayTeam: "Georgia", awaySeed: "9", strHomeTeam: "Gonzaga", homeSeed: "8", timeET: "4:35 PM" },
+            { strAwayTeam: "Wofford", awaySeed: "15", strHomeTeam: "Tennessee", homeSeed: "2", timeET: "6:50 PM" },
+            { strAwayTeam: "Arkansas", awaySeed: "10", strHomeTeam: "Kansas", homeSeed: "7", timeET: "7:10 PM" },
+            { strAwayTeam: "Yale", awaySeed: "13", strHomeTeam: "Texas A&M", homeSeed: "4", timeET: "7:25 PM" },
+            { strAwayTeam: "Drake", awaySeed: "11", strHomeTeam: "Missouri", homeSeed: "6", timeET: "7:35 PM" },
+            { strAwayTeam: "Utah State", awaySeed: "10", strHomeTeam: "UCLA", homeSeed: "7", timeET: "9:25 PM" },
+            { strAwayTeam: "Omaha", awaySeed: "15", strHomeTeam: "St. John's", homeSeed: "2", timeET: "9:45 PM" },
+            { strAwayTeam: "UC San Diego", awaySeed: "12", strHomeTeam: "Michigan", homeSeed: "5", timeET: "10:00 PM" },
+            { strAwayTeam: "UNC Wilmington", awaySeed: "14", strHomeTeam: "Texas Tech", homeSeed: "3", timeET: "10:10 PM" }
         ];
 
-        // Hardcoded NCAA Games for Friday, March 21, 2025 (in ET)
+        // Hardcoded NCAA Games for Friday, March 21, 2025 (in ET) with seeds
         const fridayGames = [
-            { strAwayTeam: "Baylor", strHomeTeam: "Mississippi State", timeET: "12:15 PM" },
-            { strAwayTeam: "Robert Morris", strHomeTeam: "Alabama", timeET: "12:40 PM" },
-            { strAwayTeam: "Lipscomb", strHomeTeam: "Iowa State", timeET: "1:30 PM" },
-            { strAwayTeam: "Colorado State", strHomeTeam: "Memphis", timeET: "2:00 PM" },
-            { strAwayTeam: "TBD", strHomeTeam: "Duke", timeET: "2:50 PM" },
-            { strAwayTeam: "Vanderbilt", strHomeTeam: "Saint Mary's", timeET: "3:15 PM" },
-            { strAwayTeam: "North Carolina", strHomeTeam: "Ole Miss", timeET: "4:05 PM" },
-            { strAwayTeam: "Grand Canyon", strHomeTeam: "Maryland", timeET: "4:35 PM" },
-            { strAwayTeam: "Norfolk State", strHomeTeam: "Florida", timeET: "6:50 PM" },
-            { strAwayTeam: "Troy", strHomeTeam: "Kentucky", timeET: "7:10 PM" },
-            { strAwayTeam: "New Mexico", strHomeTeam: "Marquette", timeET: "7:25 PM" },
-            { strAwayTeam: "Arkansas", strHomeTeam: "Arizona", timeET: "7:35 PM" },
-            { strAwayTeam: "Oklahoma", strHomeTeam: "UConn", timeET: "9:25 PM" },
-            { strAwayTeam: "TBD", strHomeTeam: "Illinois", timeET: "9:45 PM" },
-            { strAwayTeam: "Auburn", strHomeTeam: "Michigan State", timeET: "10:00 PM" },
-            { strAwayTeam: "Liberty", strHomeTeam: "Oregon", timeET: "10:10 PM" }
+            { strAwayTeam: "Baylor", awaySeed: "9", strHomeTeam: "Mississippi State", homeSeed: "8", timeET: "12:15 PM" },
+            { strAwayTeam: "Robert Morris", awaySeed: "15", strHomeTeam: "Alabama", homeSeed: "1", timeET: "12:40 PM" },
+            { strAwayTeam: "Lipscomb", awaySeed: "14", strHomeTeam: "Iowa State", homeSeed: "3", timeET: "1:30 PM" },
+            { strAwayTeam: "Colorado State", awaySeed: "12", strHomeTeam: "Memphis", homeSeed: "5", timeET: "2:00 PM" },
+            { strAwayTeam: "TBD", awaySeed: "TBD", strHomeTeam: "Duke", homeSeed: "1", timeET: "2:50 PM" },
+            { strAwayTeam: "Vanderbilt", awaySeed: "10", strHomeTeam: "St. Mary's", homeSeed: "7", timeET: "3:15 PM" },
+            { strAwayTeam: "North Carolina", awaySeed: "11", strHomeTeam: "Ole Miss", homeSeed: "6", timeET: "4:05 PM" },
+            { strAwayTeam: "Grand Canyon", awaySeed: "13", strHomeTeam: "Maryland", homeSeed: "4", timeET: "4:35 PM" },
+            { strAwayTeam: "Norfolk State", awaySeed: "16", strHomeTeam: "Florida", homeSeed: "1", timeET: "6:50 PM" },
+            { strAwayTeam: "Troy", awaySeed: "14", strHomeTeam: "Kentucky", homeSeed: "3", timeET: "7:10 PM" },
+            { strAwayTeam: "New Mexico", awaySeed: "10", strHomeTeam: "Marquette", homeSeed: "7", timeET: "7:25 PM" },
+            { strAwayTeam: "Akron", awaySeed: "13", strHomeTeam: "Arizona", homeSeed: "4", timeET: "7:35 PM" },
+            { strAwayTeam: "Oklahoma", awaySeed: "9", strHomeTeam: "UConn", homeSeed: "8", timeET: "9:25 PM" },
+            { strAwayTeam: "TBD", awaySeed: "TBD", strHomeTeam: "Illinois", homeSeed: "6", timeET: "9:45 PM" },
+            { strAwayTeam: "Bryant", awaySeed: "15", strHomeTeam: "Michigan State", homeSeed: "2", timeET: "10:00 PM" },
+            { strAwayTeam: "Liberty", awaySeed: "12", strHomeTeam: "Oregon", homeSeed: "5", timeET: "10:10 PM" }
         ];
 
         // Display Thursday Games
@@ -303,7 +303,7 @@
             } else {
                 thursdayGames.forEach(game => {
                     const gameDiv = document.createElement('div');
-                    gameDiv.innerHTML = `${game.strAwayTeam} vs ${game.strHomeTeam} at ${game.timeET} ET`;
+                    gameDiv.innerHTML = `${game.strAwayTeam} (${game.awaySeed}) vs ${game.strHomeTeam} (${game.homeSeed}) at ${game.timeET} ET`;
                     gameList.appendChild(gameDiv);
                 });
             }
@@ -317,7 +317,7 @@
             } else {
                 fridayGames.forEach(game => {
                     const gameDiv = document.createElement('div');
-                    gameDiv.innerHTML = `${game.strAwayTeam} vs ${game.strHomeTeam} at ${game.timeET} ET`;
+                    gameDiv.innerHTML = `${game.strAwayTeam} (${game.awaySeed}) vs ${game.strHomeTeam} (${game.homeSeed}) at ${game.timeET} ET`;
                     gameList.appendChild(gameDiv);
                 });
             }
