@@ -83,11 +83,10 @@
             box-sizing: border-box;
             background-color: #fff;
             color: #2A6A5E;
-            position: relative;
         }
         select {
             width: 100%;
-            paddingṇ: 8px;
+            padding: 8px;
             margin-bottom: 15px;
             border: 2px solid #2A6A5E;
             border-radius: 5px;
@@ -151,26 +150,21 @@
             color: red;
             font-weight: bold;
         }
-        .day1-container input[type="text"]::after,
-        .day2-container input[type="text"]::after,
-        .day3-container input[type="text"]::after,
-        .day4-container input[type="text"]::after {
+        .strikethrough {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .strikethrough::after {
             content: '';
             position: absolute;
-            top: 50%;
+            top: 45%; /* Adjusted from 40% to 45% for better centering */
             left: 0;
             width: 100%;
             height: 2px;
             background-color: red;
             transform: translateY(-50%);
             z-index: 1;
-        }
-        .day1-container,
-        .day2-container,
-        .day3-container,
-        .day4-container {
-            position: relative;
-            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -218,25 +212,17 @@
                     <option value="Mike Gallagher">Mike Gallagher</option>
                 </select><br>
                 
-                <div class="day1-container">
-                    <label for="entry.569924040">Day 1 Selection (Thursday 3-20): </label>
-                    <input type="text" name="entry.569924040" id="entry.569924040" disabled>
-                </div>
+                <label for="entry.569924040">Day 1 Selection (Thursday 3-20): </label>
+                <span class="strikethrough"><input type="text" name="entry.569924040" id="entry.569924040" disabled></span>
                 
-                <div class="day2-container">
-                    <label for="entry.702432809">Day 2 Selection (Friday 3-21): </label>
-                    <input type="text" name="entry.702432809" id="entry.702432809" disabled>
-                </div>
+                <label for="entry.702432809">Day 2 Selection (Friday 3-21): </label>
+                <span class="strikethrough"><input type="text" name="entry.702432809" id="entry.702432809" disabled></span>
                 
-                <div class="day3-container">
-                    <label for="entry.759815260">Day 3 Selection (Saturday 3-22): </label>
-                    <input type="text" name="entry.759815260" id="entry.759815260" disabled>
-                </div>
+                <label for="entry.759815260">Day 3 Selection (Saturday 3-22): </label>
+                <span class="strikethrough"><input type="text" name="entry.759815260" id="entry.759815260" disabled></span>
                 
-                <div class="day4-container">
-                    <label for="entry.577425884">Day 4 Selection (Sunday 3-23): </label>
-                    <input type="text" name="entry.577425884" id="entry.577425884"><br>
-                </div>
+                <label for="entry.577425884">Day 4 Selection (Sunday 3-23): </label>
+                <span class="strikethrough"><input type="text" name="entry.577425884" id="entry.577425884"></span><br>
 
                 <label for="entry.20028034">Day 5 Selection (Thursday 3-27): </label>
                 <input type="text" name="entry.20028034" id="entry.20028034"><br>
@@ -299,22 +285,21 @@
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call to display immediately
 
-        // Hardcoded NCAA Games for Thursday, March 27, 2025 (in ET) with seeds
+        // Updated NCAA Games for Thursday, March 27, 2025 (in ET) with seeds
         const thursdayGames = [
             { strAwayTeam: "BYU", awaySeed: "6", strHomeTeam: "Alabama", homeSeed: "2", timeET: "7:09 PM" },
             { strAwayTeam: "Maryland", awaySeed: "4", strHomeTeam: "Florida", homeSeed: "1", timeET: "7:39 PM" },
             { strAwayTeam: "Arizona", awaySeed: "4", strHomeTeam: "Duke", homeSeed: "1", timeET: "9:39 PM" },
-            { strAwayTeam: "Arkansas", awaySeed: "10", strHomeTeam: "Texas Tech", homeSeed: "3", timeET: "10:09 PM" },
-   
+            { strAwayTeam: "Arkansas", awaySeed: "10", strHomeTeam: "Texas Tech", homeSeed: "3", timeET: "10:09 PM" }
         ];
 
-        // Hardcoded NCAA Games for Friday, March 28, 2025 (in ET) with seeds
+        // Updated NCAA Games for Friday, March 28, 2025 (in ET) with seeds
         const fridayGames = [
             { strAwayTeam: "Ole Miss", awaySeed: "6", strHomeTeam: "Michigan State", homeSeed: "2", timeET: "7:09 PM" },
             { strAwayTeam: "Kentucky", awaySeed: "3", strHomeTeam: "Tennessee", homeSeed: "2", timeET: "7:39 PM" },
             { strAwayTeam: "Michigan", awaySeed: "5", strHomeTeam: "Auburn", homeSeed: "1", timeET: "9:39 PM" },
-            { strAwayTeam: "Purdue", awaySeed: "4", strHomeTeam: "Houston", homeSeed: "1", timeET: "10:09 PM" },
-      
+            { strAwayTeam: "Purdue", awaySeed: "4", strHomeTeam: "Houston", homeSeed: "1", timeET: "10:09 PM" }
+        ];
 
         // Display Thursday Games
         function displayThursdayGames() {
