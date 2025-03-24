@@ -83,10 +83,11 @@
             box-sizing: border-box;
             background-color: #fff;
             color: #2A6A5E;
+            position: relative;
         }
         select {
             width: 100%;
-            padding: 8px;
+            paddingṇ: 8px;
             margin-bottom: 15px;
             border: 2px solid #2A6A5E;
             border-radius: 5px;
@@ -150,41 +151,26 @@
             color: red;
             font-weight: bold;
         }
-        .day1-container {
+        .day1-container input[type="text"]::after,
+        .day2-container input[type="text"]::after,
+        .day3-container input[type="text"]::after,
+        .day4-container input[type="text"]::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: red;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .day1-container,
+        .day2-container,
+        .day3-container,
+        .day4-container {
             position: relative;
             margin-bottom: 15px;
-        }
-        .day1-container::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: red;
-            z-index: 1;
-        }
-           
-        .day2-container::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: red;
-            z-index: 1;
-        }
-           
-        .day3-container::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: red;
-            z-index: 1;
         }
     </style>
 </head>
@@ -192,7 +178,7 @@
     <div class="container">
         <!-- Thursday Games (Left) -->
         <div class="game-list thursday-games">
-            <h2>Thursday, March 20 (Day 1)</h2>
+            <h2>Thursday, March 27 (Day 5)</h2>
             <div id="thursday-games"></div>
         </div>
 
@@ -237,14 +223,20 @@
                     <input type="text" name="entry.569924040" id="entry.569924040" disabled>
                 </div>
                 
-                <label for="entry.702432809">Day 2 Selection (Friday 3-21): </label>
-                <input type="text" name="entry.702432809" id="entry.702432809" disabled>
+                <div class="day2-container">
+                    <label for="entry.702432809">Day 2 Selection (Friday 3-21): </label>
+                    <input type="text" name="entry.702432809" id="entry.702432809" disabled>
+                </div>
                 
-                <label for="entry.759815260">Day 3 Selection (Saturday 3-22): </label>
-                <input type="text" name="entry.759815260" id="entry.759815260" disabled>
+                <div class="day3-container">
+                    <label for="entry.759815260">Day 3 Selection (Saturday 3-22): </label>
+                    <input type="text" name="entry.759815260" id="entry.759815260" disabled>
+                </div>
                 
-                <label for="entry.577425884">Day 4 Selection (Sunday 3-23): </label>
-                <input type="text" name="entry.577425884" id="entry.577425884"><br>
+                <div class="day4-container">
+                    <label for="entry.577425884">Day 4 Selection (Sunday 3-23): </label>
+                    <input type="text" name="entry.577425884" id="entry.577425884"><br>
+                </div>
 
                 <label for="entry.20028034">Day 5 Selection (Thursday 3-27): </label>
                 <input type="text" name="entry.20028034" id="entry.20028034"><br>
@@ -267,7 +259,7 @@
 
         <!-- Friday Games (Right) -->
         <div class="game-list friday-games">
-            <h2>Friday, March 21 (Day 2)</h2>
+            <h2>Friday, March 28 (Day 6)</h2>
             <div id="friday-games"></div>
         </div>
     </div>
@@ -307,45 +299,22 @@
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call to display immediately
 
-        // Hardcoded NCAA Games for Thursday, March 20, 2025 (in ET) with seeds
+        // Hardcoded NCAA Games for Thursday, March 27, 2025 (in ET) with seeds
         const thursdayGames = [
-            { strAwayTeam: "Creighton", awaySeed: "9", strHomeTeam: "Louisville", homeSeed: "8", timeET: "12:15 PM" },
-            { strAwayTeam: "High Point", awaySeed: "13", strHomeTeam: "Purdue", homeSeed: "4", timeET: "12:40 PM" },
-            { strAwayTeam: "Montana", awaySeed: "14", strHomeTeam: "Wisconsin", homeSeed: "3", timeET: "1:30 PM" },
-            { strAwayTeam: "SIU Edwardsville", awaySeed: "16", strHomeTeam: "Houston", homeSeed: "1", timeET: "2:00 PM" },
-            { strAwayTeam: "Alabama State", awaySeed: "16", strHomeTeam: "Auburn", homeSeed: "1", timeET: "2:50 PM" },
-            { strAwayTeam: "McNeese", awaySeed: "12", strHomeTeam: "Clemson", homeSeed: "5", timeET: "3:15 PM" },
-            { strAwayTeam: "VCU", awaySeed: "11", strHomeTeam: "BYU", homeSeed: "6", timeET: "4:05 PM" },
-            { strAwayTeam: "Georgia", awaySeed: "9", strHomeTeam: "Gonzaga", homeSeed: "8", timeET: "4:35 PM" },
-            { strAwayTeam: "Wofford", awaySeed: "15", strHomeTeam: "Tennessee", homeSeed: "2", timeET: "6:50 PM" },
-            { strAwayTeam: "Arkansas", awaySeed: "10", strHomeTeam: "Kansas", homeSeed: "7", timeET: "7:10 PM" },
-            { strAwayTeam: "Yale", awaySeed: "13", strHomeTeam: "Texas A&M", homeSeed: "4", timeET: "7:25 PM" },
-            { strAwayTeam: "Drake", awaySeed: "11", strHomeTeam: "Missouri", homeSeed: "6", timeET: "7:35 PM" },
-            { strAwayTeam: "Utah State", awaySeed: "10", strHomeTeam: "UCLA", homeSeed: "7", timeET: "9:25 PM" },
-            { strAwayTeam: "Omaha", awaySeed: "15", strHomeTeam: "St. John's", homeSeed: "2", timeET: "9:45 PM" },
-            { strAwayTeam: "UC San Diego", awaySeed: "12", strHomeTeam: "Michigan", homeSeed: "5", timeET: "10:00 PM" },
-            { strAwayTeam: "UNC Wilmington", awaySeed: "14", strHomeTeam: "Texas Tech", homeSeed: "3", timeET: "10:10 PM" }
+            { strAwayTeam: "BYU", awaySeed: "6", strHomeTeam: "Alabama", homeSeed: "2", timeET: "7:09 PM" },
+            { strAwayTeam: "Maryland", awaySeed: "4", strHomeTeam: "Florida", homeSeed: "1", timeET: "7:39 PM" },
+            { strAwayTeam: "Arizona", awaySeed: "4", strHomeTeam: "Duke", homeSeed: "1", timeET: "9:39 PM" },
+            { strAwayTeam: "Arkansas", awaySeed: "10", strHomeTeam: "Texas Tech", homeSeed: "3", timeET: "10:09 PM" },
+   
         ];
 
-        // Hardcoded NCAA Games for Friday, March 21, 2025 (in ET) with seeds
+        // Hardcoded NCAA Games for Friday, March 28, 2025 (in ET) with seeds
         const fridayGames = [
-            { strAwayTeam: "Baylor", awaySeed: "9", strHomeTeam: "Mississippi State", homeSeed: "8", timeET: "12:15 PM" },
-            { strAwayTeam: "Robert Morris", awaySeed: "15", strHomeTeam: "Alabama", homeSeed: "1", timeET: "12:40 PM" },
-            { strAwayTeam: "Lipscomb", awaySeed: "14", strHomeTeam: "Iowa State", homeSeed: "3", timeET: "1:30 PM" },
-            { strAwayTeam: "Colorado State", awaySeed: "12", strHomeTeam: "Memphis", homeSeed: "5", timeET: "2:00 PM" },
-            { strAwayTeam: "Mount St. Mary's", awaySeed: "16", strHomeTeam: "Duke", homeSeed: "1", timeET: "2:50 PM" },
-            { strAwayTeam: "Vanderbilt", awaySeed: "10", strHomeTeam: "St. Mary's", homeSeed: "7", timeET: "3:15 PM" },
-            { strAwayTeam: "North Carolina", awaySeed: "11", strHomeTeam: "Ole Miss", homeSeed: "6", timeET: "4:05 PM" },
-            { strAwayTeam: "Grand Canyon", awaySeed: "13", strHomeTeam: "Maryland", homeSeed: "4", timeET: "4:35 PM" },
-            { strAwayTeam: "Norfolk State", awaySeed: "16", strHomeTeam: "Florida", homeSeed: "1", timeET: "6:50 PM" },
-            { strAwayTeam: "Troy", awaySeed: "14", strHomeTeam: "Kentucky", homeSeed: "3", timeET: "7:10 PM" },
-            { strAwayTeam: "New Mexico", awaySeed: "10", strHomeTeam: "Marquette", homeSeed: "7", timeET: "7:25 PM" },
-            { strAwayTeam: "Akron", awaySeed: "13", strHomeTeam: "Arizona", homeSeed: "4", timeET: "7:35 PM" },
-            { strAwayTeam: "Oklahoma", awaySeed: "9", strHomeTeam: "UConn", homeSeed: "8", timeET: "9:25 PM" },
-            { strAwayTeam: "Xavier", awaySeed: "11", strHomeTeam: "Illinois", homeSeed: "6", timeET: "9:45 PM" },
-            { strAwayTeam: "Bryant", awaySeed: "15", strHomeTeam: "Michigan State", homeSeed: "2", timeET: "10:00 PM" },
-            { strAwayTeam: "Liberty", awaySeed: "12", strHomeTeam: "Oregon", homeSeed: "5", timeET: "10:10 PM" }
-        ];
+            { strAwayTeam: "Ole Miss", awaySeed: "6", strHomeTeam: "Michigan State", homeSeed: "2", timeET: "7:09 PM" },
+            { strAwayTeam: "Kentucky", awaySeed: "3", strHomeTeam: "Tennessee", homeSeed: "2", timeET: "7:39 PM" },
+            { strAwayTeam: "Michigan", awaySeed: "5", strHomeTeam: "Auburn", homeSeed: "1", timeET: "9:39 PM" },
+            { strAwayTeam: "Purdue", awaySeed: "4", strHomeTeam: "Houston", homeSeed: "1", timeET: "10:09 PM" },
+      
 
         // Display Thursday Games
         function displayThursdayGames() {
