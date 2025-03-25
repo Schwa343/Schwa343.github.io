@@ -211,7 +211,15 @@
                     <option value="Tyler Decoster">Tyler Decoster</option>
                   <!--  <option value="Mike Gallagher">Mike Gallagher</option>-->
                 </select><br>
-                
+                <script>
+document.getElementById("entry.477724720").addEventListener("invalid", function () {
+    this.setCustomValidity("Please select your name before submitting!");
+});
+
+document.getElementById("entry.477724720").addEventListener("change", function () {
+    this.setCustomValidity(""); // Reset validation message when a valid selection is made
+});
+</script>
                 <label for="entry.569924040">Day 1 Selection (Thursday 3-20): </label>
                 <span class="strikethrough"><input type="text" name="entry.569924040" id="entry.569924040" disabled></span>
                 
