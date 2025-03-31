@@ -133,13 +133,12 @@
             });
         });
 
-        // Form validation for team selection
+        // Form validation and redirect
         document.getElementById('survivorForm').addEventListener('submit', function(event) {
             if (!selectedTeam) {
                 teamInput.setCustomValidity('Please select a team!');
                 event.preventDefault();
+                return;
             }
-        });
-    </script>
-</body>
-</html>
+            // Redirect to Google Sheet after a short delay to allow form submission
+            setTimeout(()
