@@ -112,7 +112,7 @@
         </form>
 
         <!-- Hidden iframe to handle form submission -->
-        <iframe name="hiddenFrame" style="display:none;"></iframe>
+        <iframe name="hiddenFrame" style="display:none;" onload="redirectToSheet()"></iframe>
     </div>
     
     <!-- Author credit at the bottom -->
@@ -123,8 +123,20 @@
         let selectedTeam = null;
         const teamButtons = document.querySelectorAll('.team-btn');
         const teamInput = document.getElementById('teamSelection');
+
+        // Load any previously selected team (if the page refreshes)
+        if (teamInput.value) {
+            selectedTeam = teamInput.value;
+            teamButtons.forEach(button => {
+                if (button.getAttribute('data-team') === selectedTeam) {
+                    button.classList.add('selected');
+                }
+            });
+        }
+
         teamButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent any default behavior
                 teamButtons.forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('selected');
                 selectedTeam = this.getAttribute('data-team');
@@ -133,12 +145,23 @@
             });
         });
 
-        // Form validation and redirect
+        // Form validation and submission handling
+        let formSubmitted = false; // Flag to track if form was submitted
         document.getElementById('survivorForm').addEventListener('submit', function(event) {
             if (!selectedTeam) {
                 teamInput.setCustomValidity('Please select a team!');
                 event.preventDefault();
                 return;
             }
-            // Redirect to Google Sheet after a short delay to allow form submission
-            setTimeout(()
+            formSubmitted = true; // Set flag to true on successful submission
+        });
+
+        // Redirect function triggered by iframe onload
+        function redirectToSheet() {
+            if (formSubmitted) {
+                window.location.href = 'https://docs.google.com/spreadsheets/d/1pGraOWrTnMzlJVy4HyhalR0uaSSa5-EywcQ67wReSsE/edit?gid=2020266128#gid=2020266128';
+            }
+        }
+    </script>
+</body>
+</html>
