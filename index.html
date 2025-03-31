@@ -9,20 +9,13 @@
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+            flex-direction: column;
             min-height: 100vh;
             margin: 0;
             position: relative;
             padding: 20px;
             padding-bottom: 50px;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            flex-wrap: nowrap;
-            min-width: 1200px; /* Ensures space for all three columns */
         }
         .form-container {
             background-color: rgba(232, 232, 232, 0.65);
@@ -30,36 +23,6 @@
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             width: 460px;
-            text-align: center;
-            order: 2;
-            flex-shrink: 0;
-        }
-        .game-list {
-            background-color: rgba(232, 232, 232, 0.65);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            width: 350px;
-            text-align: center;
-            color: #2A6A5E;
-            flex-shrink: 0;
-        }
-        .thursday-games {
-            order: 1;
-        }
-        .friday-games {
-            order: 3;
-        }
-        .game-list h2 {
-            font-size: 16px;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        .game-list div {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #2A6A5E;
-            white-space: nowrap;
             text-align: center;
         }
         h1 {
@@ -72,35 +35,6 @@
             margin: 10px 0 5px;
             color: #2A6A5E;
             font-weight: bold;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 2px solid #2A6A5E;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-            background-color: #fff;
-            color: #2A6A5E;
-        }
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 2px solid #2A6A5E;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-            background-color: #fff;
-            color: #2A6A5E;
-            text-align: center;
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%2318453B" d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 12px;
-            cursor: pointer;
         }
         button {
             background-color: #2A6A5E;
@@ -134,212 +68,78 @@
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
         }
-        .countdown-container {
+        /* Styles for the form's team selection buttons */
+        .team-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin-bottom: 15px;
-            text-align: center;
         }
-        #countdown-label {
-            display: block;
-            color: red;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 5px;
+        .team-btn {
+            background-color: #fff;
+            color: #2A6A5E;
+            padding: 8px 20px;
+            border: 2px solid #2A6A5E;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
-        #countdown {
-            font-size: 24px;
-            color: red;
-            font-weight: bold;
+        .team-btn.selected {
+            background-color: #d3d3d3;
         }
-        .strikethrough {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-        .strikethrough::after {
-            content: '';
-            position: absolute;
-            top: 45%; /* Adjusted from 40% to 45% for better centering */
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: red;
-            transform: translateY(-50%);
-            z-index: 1;
+        .team-btn:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Thursday Games (Left) -->
-        <div class="game-list thursday-games">
-            <h2>Thursday, March 27 (Day 5)</h2>
-            <div id="thursday-games"></div>
-        </div>
+    <!-- Main Form (Center) -->
+    <div class="form-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/March_Madness_logo.svg" class="header-img" alt="NCAA Header">
+        <h1>NCAA 2025 Survivor Bracket Form</h1>
+        
+        <form id="survivorForm" action="https://docs.google.com/forms/d/e/1FAIpQLSehgqnTf8G8UrobvWRhiDUK6iuLt5zVNPhVnONYM9G5n_LAZQ/formResponse" method="POST" target="hiddenFrame">
+            <!-- Team Selection for Brian -->
+            <label for="entry.2021134940">Brian's Team Selection: </label>
+            <div class="team-selection">
+                <button type="button" class="team-btn" data-team="Auburn">Auburn</button>
+                <button type="button" class="team-btn" data-team="Duke">Duke</button>
+            </div>
+            <input type="hidden" name="entry.2021134940" id="teamSelection" required>
 
-        <!-- Main Form (Center) -->
-        <div class="form-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/March_Madness_logo.svg" class="header-img" alt="NCAA Header">
-            <h1>NCAA 2025 Survivor Bracket Form</h1>
-            
-            <form id="survivorForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe_AvA48EOZ-1YIYkiyWhAmQATqwakSTMvfg-ohrykK7bhjjg/formResponse" method="POST" target="hiddenFrame">
-                <!-- Countdown Clock with Title -->
-                <div class="countdown-container">
-                    <div id="countdown"></div>
-                </div>
-                
-                <label for="entry.477724720">What is your name: </label>
-                <select name="entry.477724720" id="entry.477724720" required>
-                    <option value="" disabled selected>Select your name</option>
-                    <option value="Patrick Gifford">Patrick Gifford</option>
-                    <!--<option value="Garret Gotaas">Garret Gotaas</option>-->
-                    <option value="Mike Schwartz">Mike Schwartz</option>
-                   <!-- <option value="Derrick Defever">Derrick Defever</option>-->
-                    <option value="Matt Syzmanski">Matt Syzmanski</option>
-                   <!-- <option value="Connor Giroux">Connor Giroux</option>-->
-                    <option value="Nick Dahl">Nick Dahl</option>
-                    <!--<option value="Chris Canada">Chris Canada</option>-->
-                    <option value="Brian Burger">Brian Burger</option>
-                    <option value="Rich Deward">Rich Deward</option>
-                    <!--<option value="Peter Murray">Peter Murray</option>-->
-                    <option value="Spenser Pawlik">Spenser Pawlik</option>
-                    <option value="Nick Mowid">Nick Mowid</option>
-                    <option value="James Conway">James Conway</option>
-                    <!--<option value="Tom Strobel">Tom Strobel</option>-->
-                    <option value="Zak Burns">Zak Burns</option>
-                   <!-- <option value="Alex McAdoo">Alex McAdoo</option>
-                    <option value="Sean Falvey">Sean Falvey</option>-->
-                    <option value="Tyler Decoster">Tyler Decoster</option>
-                  <!--  <option value="Mike Gallagher">Mike Gallagher</option>-->
-                </select><br>
-                <script>
-document.getElementById("entry.477724720").addEventListener("invalid", function () {
-    this.setCustomValidity("OPE, FORGOT YOUR NAME AGAIN MOWID!");
-});
+            <button type="submit">Submit Brian's Pick</button>
+        </form>
 
-document.getElementById("entry.477724720").addEventListener("change", function () {
-    this.setCustomValidity(""); // Reset validation message when a valid selection is made
-});
-</script>
-                <label for="entry.569924040">Day 1 Selection (Thursday 3-20): </label>
-                <span class="strikethrough"><input type="text" name="entry.569924040" id="entry.569924040" disabled></span>
-                
-                <label for="entry.702432809">Day 2 Selection (Friday 3-21): </label>
-                <span class="strikethrough"><input type="text" name="entry.702432809" id="entry.702432809" disabled></span>
-                
-                <label for="entry.759815260">Day 3 Selection (Saturday 3-22): </label>
-                <span class="strikethrough"><input type="text" name="entry.759815260" id="entry.759815260" disabled></span>
-                
-                <label for="entry.577425884">Day 4 Selection (Sunday 3-23): </label>
-                <span class="strikethrough"><input type="text" name="entry.577425884" id="entry.577425884" disabled></span><br>
-
-                <label for="entry.20028034">Day 5 Selection (Thursday 3-27): </label>
-                <span class="strikethrough"><input type="text" name="entry.20028034" id="entry.20028034" disabled></span><br>
-                
-                <label for="entry.979732111">Day 6 Selection (Friday 3-28): </label>
-                <input type="text" name="entry.979732111" id="entry.979732111"><br>
-                
-                <label for="entry.2142180165">Day 7 Selection (Saturday 3-29): </label>
-                <input type="text" name="entry.2142180165" id="entry.2142180165"><br>
-                
-                <label for="entry.269056470">Day 8 Selection (Sunday 3-30): </label>
-                <input type="text" name="entry.269056470" id="entry.269056470"><br>
-                
-                <button type="submit">Submit Picks / View Results</button>
-            </form>
-
-            <!-- Hidden iframe to handle form submission -->
-            <iframe name="hiddenFrame" style="display:none;"></iframe>
-        </div>
-
-        <!-- Friday Games (Right) -->
-        <div class="game-list friday-games">
-            <h2>Friday, March 28 (Day 6)</h2>
-            <div id="friday-games"></div>
-        </div>
+        <!-- Hidden iframe to handle form submission -->
+        <iframe name="hiddenFrame" style="display:none;"></iframe>
     </div>
     
     <!-- Author credit at the bottom -->
     <div class="author-credit">Created by Mike Schwartz</div>
     
     <script>
-        // Form submission redirect
-        document.getElementById('survivorForm').addEventListener('submit', function(event) {
-            setTimeout(() => {
-                window.location.href = 'https://docs.google.com/spreadsheets/d/1pGraOWrTnMzlJVy4HyhalR0uaSSa5-EywcQ67wReSsE/edit?gid=2020266128#gid=2020266128';
-            }, 1000);
+        // Team Selection for Brian in the Form
+        let selectedTeam = null;
+        const teamButtons = document.querySelectorAll('.team-btn');
+        const teamInput = document.getElementById('teamSelection');
+        teamButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                teamButtons.forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedTeam = this.getAttribute('data-team');
+                teamInput.value = selectedTeam;
+                teamInput.setCustomValidity(''); // Clear any validation message
+            });
         });
 
-        // Countdown Clock
-        function updateCountdown() {
-            var targetDate = new Date("March 21, 2025 12:00:00"); // Noon on March 21, 2025
-            var now = new Date();
-            var timeLeft = targetDate - now;
-
-            if (timeLeft <= 0) {
-                document.getElementById("countdown").innerHTML = "Tournament Has Begun!";
-                return;
+        // Form validation for team selection
+        document.getElementById('survivorForm').addEventListener('submit', function(event) {
+            if (!selectedTeam) {
+                teamInput.setCustomValidity('Please select a team!');
+                event.preventDefault();
             }
-
-            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML = 
-                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-        }
-
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to display immediately
-
-        // Updated NCAA Games for Thursday, March 27, 2025 (in ET) with seeds
-        const thursdayGames = [
-            { strAwayTeam: "BYU", awaySeed: "6", strHomeTeam: "Alabama", homeSeed: "2", timeET: "7:09 PM" },
-            { strAwayTeam: "Maryland", awaySeed: "4", strHomeTeam: "Florida", homeSeed: "1", timeET: "7:39 PM" },
-            { strAwayTeam: "Arizona", awaySeed: "4", strHomeTeam: "Duke", homeSeed: "1", timeET: "9:39 PM" },
-            { strAwayTeam: "Arkansas", awaySeed: "10", strHomeTeam: "Texas Tech", homeSeed: "3", timeET: "10:09 PM" }
-        ];
-
-        // Updated NCAA Games for Friday, March 28, 2025 (in ET) with seeds
-        const fridayGames = [
-            { strAwayTeam: "Ole Miss", awaySeed: "6", strHomeTeam: "Michigan State", homeSeed: "2", timeET: "7:09 PM" },
-            { strAwayTeam: "Kentucky", awaySeed: "3", strHomeTeam: "Tennessee", homeSeed: "2", timeET: "7:39 PM" },
-            { strAwayTeam: "Michigan", awaySeed: "5", strHomeTeam: "Auburn", homeSeed: "1", timeET: "9:39 PM" },
-            { strAwayTeam: "Purdue", awaySeed: "4", strHomeTeam: "Houston", homeSeed: "1", timeET: "10:09 PM" }
-        ];
-
-        // Display Thursday Games
-        function displayThursdayGames() {
-            const gameList = document.getElementById('thursday-games');
-            if (thursdayGames.length === 0) {
-                gameList.innerHTML = '<p>No games scheduled.</p>';
-            } else {
-                thursdayGames.forEach(game => {
-                    const gameDiv = document.createElement('div');
-                    gameDiv.innerHTML = `${game.strAwayTeam} (${game.awaySeed}) vs ${game.strHomeTeam} (${game.homeSeed}) at ${game.timeET} ET`;
-                    gameList.appendChild(gameDiv);
-                });
-            }
-        }
-
-        // Display Friday Games
-        function displayFridayGames() {
-            const gameList = document.getElementById('friday-games');
-            if (fridayGames.length === 0) {
-                gameList.innerHTML = '<p>No games scheduled.</p>';
-            } else {
-                fridayGames.forEach(game => {
-                    const gameDiv = document.createElement('div');
-                    gameDiv.innerHTML = `${game.strAwayTeam} (${game.awaySeed}) vs ${game.strHomeTeam} (${game.homeSeed}) at ${game.timeET} ET`;
-                    gameList.appendChild(gameDiv);
-                });
-            }
-        }
-
-        // Call the functions when the page loads
-        displayThursdayGames();
-        displayFridayGames();
+        });
     </script>
 </body>
 </html>
